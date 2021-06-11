@@ -1,0 +1,47 @@
+{
+    "places": [
+        {
+            "name": "miejsce 1"
+        },
+        {
+            "name": "miejsce 2"
+        },
+        {
+            "name": "miejsce 3"
+        },
+        {
+            "name": "miejsce 4"
+        },
+        {
+            "name": "miejsce 5"
+        }
+    ],
+    "start": 1,
+    "routes": [
+        {
+            "start": 1,
+            "end": 2,
+            "len": 10.0
+        },
+        {
+            "start": 2,
+            "end": 3,
+            "len": 10.0
+        },
+        {
+            "start": 3,
+            "end": 4,
+            "len": 20.0
+        },
+        {
+            "start": 4,
+            "end": 5,
+            "len": 15.0
+        },
+        {
+            "start": 5,
+            "end": 1,
+            "len": 60.0
+        }
+    ]
+}
