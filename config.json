@@ -1,0 +1,9 @@
+{
+    "random_map": true,
+    "rand_places": 100,
+    "iterations": 100,
+    "ants": 20,
+    "alpha": 1,
+    "beta": 1,
+    "decay": 0.1
+}

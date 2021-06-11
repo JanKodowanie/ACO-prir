@@ -1,14 +1,18 @@
 from map_reader import MapReader
+from config import Config
 
 
 MAP_FILENAME = 'map.json'
 CONFIG_FILENAME = 'config.json'
-MAX_NUMBER_OF_ITERATIONS = 1000
-NUMBER_OF_ANTS = 20
-ALPHA_COEFF = 1
-BETA_COEFF = 1
-DECAY_RATE = 0.5
 
+config = Config()
+config.read_config_from_file(CONFIG_FILENAME)
 
-map_reader = MapReader(MAP_FILENAME)
-map = map_reader.read_map()
+map = None
+if not config.random_map:
+    map_reader = MapReader(MAP_FILENAME)
+    map = map_reader.read_map()
+else:
+    map = config.randomize_map()
+
+print(map.connections)
