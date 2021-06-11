@@ -27,7 +27,7 @@ class MapReader:
         return list(map(lambda place: place['name'], places))
 
     def __parse_routes(self, routes, places_num) -> np.ndarray:
-        routes_as_arr = np.full((places_num, places_num), np.inf)
+        routes_as_arr = np.full((places_num, places_num), None)
 
         for route_data in routes:
             start = route_data['start'] - 1
