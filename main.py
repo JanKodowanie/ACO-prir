@@ -1,4 +1,5 @@
 from map_reader import MapReader
+from ant_colony import AntColony
 from config import Config
 
 
@@ -15,4 +16,10 @@ if not config.random_map:
 else:
     map = config.randomize_map()
 
-print(map.connections)
+colony = AntColony(map, config.alpha, config.beta, config.decay)
+route = colony.find_new_route()
+print(route)
+colony.leave_pheromones([route[0]])
+print(map.pheromones)
+colony.evaporate_pheromones()
+print(map.pheromones)

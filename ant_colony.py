@@ -13,22 +13,27 @@ class AntColony:
         self.decay = decay
 
     def find_new_route(self):
-        places_to_visit = [x for x in range(len(self.map.places))].pop(self.map.start)
+        places_to_visit = [x for x in range(len(self.map.places))]
+        places_to_visit.remove(self.map.start)
+
         if self.map.start != self.map.end:
-            places_to_visit.pop(self.map.end)
+            places_to_visit.remove(self.map.end)
 
         current = self.map.start
-        route = [].append(current)
+        route = []
+        route.append(current)
         total_len = 0
         
         while places_to_visit:
+            print(places_to_visit)
             next = self.__select_next_place(current, places_to_visit)
+            print(next)
             total_len += self.map.connections[current][next]
             current = next
-            places_to_visit.pop(current)
+            places_to_visit.remove(current)
             route.append(current)
 
-        route.append[self.map.end]
+        route.append(self.map.end)
         total_len += self.map.connections[current][self.map.end]
 
         return route, total_len
@@ -51,13 +56,13 @@ class AntColony:
 
         for i in range(places_num):
             p = places_to_visit[i]
-            fitnesses[i] = self.map.pheromones[current][p] ** self.alpha + \
-                (1 / self.map.connections[current][p]) ** self.beta 
+            fitnesses.append(self.map.pheromones[current][p] ** self.alpha + \
+                (1 / self.map.connections[current][p]) ** self.beta)
             total_fitness += fitnesses[i]
 
         if total_fitness != 0:
             for i in range(places_num):
-                probabilities[i] = fitnesses[i] / total_fitness
+                probabilities.append(fitnesses[i] / total_fitness)
         else:
             probabilities = [1 / places_num for i in range(0, places_num)]
 
