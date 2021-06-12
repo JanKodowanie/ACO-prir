@@ -1,14 +1,41 @@
 from map_reader import MapReader
+from ant_colony import AntColony
+from config import Config
 
 
 MAP_FILENAME = 'map.json'
 CONFIG_FILENAME = 'config.json'
-MAX_NUMBER_OF_ITERATIONS = 1000
-NUMBER_OF_ANTS = 20
-ALPHA_COEFF = 1
-BETA_COEFF = 1
-DECAY_RATE = 0.5
+RANDOM_MAP_SAVE_FILENAME = 'randmap.json'
+
+config = Config()
+config.read_config_from_file(CONFIG_FILENAME)
+
+places_map = None
+if not config.random_map:
+    map_reader = MapReader(MAP_FILENAME)
+    places_map = map_reader.read_map()
+else:
+    places_map = config.randomize_map()
+
+colony = AntColony(places_map, config.alpha, config.beta, config.decay)
+best_route = None
+
+for i in range(config.iterations):
+    i_routes = []
+    colony.evaporate_pheromones()
+    for j in range(config.ants):
+        route = colony.find_new_route()
+        # lengths are under index 1
+        if not best_route or route[1] < best_route[1]:
+            best_route = route
+        i_routes.append(route[0])
+    colony.leave_pheromones(i_routes)
 
 
-map_reader = MapReader(MAP_FILENAME)
-map = map_reader.read_map()
+best_route_str = list(map(lambda id: places_map.places[id], best_route[0]))
+print('Best route:')
+print(' -> '.join(best_route_str))
+print(f'Length: {best_route[1]}')
+
+if config.rand_places and config.save_generated_map:
+    config.save_generated_map_to_file(RANDOM_MAP_SAVE_FILENAME, places_map)

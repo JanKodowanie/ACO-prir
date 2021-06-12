@@ -1,0 +1,10 @@
+{
+    "random_map": true,
+    "save_generated_map": true,
+    "rand_places": 20,
+    "iterations": 10,
+    "ants": 20,
+    "alpha": 1.5,
+    "beta": 1,
+    "decay": 0.3
+}
