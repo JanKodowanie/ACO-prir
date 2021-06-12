@@ -1,5 +1,4 @@
 import numpy as np
-import random
 from typing import List
 from map import Map
 
@@ -25,9 +24,7 @@ class AntColony:
         total_len = 0
         
         while places_to_visit:
-            print(places_to_visit)
             next = self.__select_next_place(current, places_to_visit)
-            print(next)
             total_len += self.map.connections[current][next]
             current = next
             places_to_visit.remove(current)
