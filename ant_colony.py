@@ -53,8 +53,8 @@ class AntColony:
 
         for i in range(places_num):
             p = places_to_visit[i]
-            fitnesses.append(self.map.pheromones[current][p] ** self.alpha + \
-                (1 / self.map.connections[current][p]) ** self.beta)
+            fitnesses.append( (self.map.pheromones[current][p] ** self.alpha) * \
+                ((1 / self.map.connections[current][p]) ** self.beta) )
             total_fitness += fitnesses[i]
 
         if total_fitness != 0:

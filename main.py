@@ -1,6 +1,7 @@
 from map_reader import MapReader
 from ant_colony import AntColony
 from config import Config
+import time
 
 
 MAP_FILENAME = 'map.json'
@@ -20,6 +21,8 @@ else:
 colony = AntColony(places_map, config.alpha, config.beta, config.decay)
 best_route = None
 
+calc_start_time = time.time()
+
 for i in range(config.iterations):
     i_routes = []
     colony.evaporate_pheromones()
@@ -31,11 +34,14 @@ for i in range(config.iterations):
         i_routes.append(route[0])
     colony.leave_pheromones(i_routes)
 
-
 best_route_str = list(map(lambda id: places_map.places[id], best_route[0]))
+calc_time_elapsed = time.time() - calc_start_time
+
 print('Best route:')
 print(' -> '.join(best_route_str))
 print(f'Length: {best_route[1]}')
+print()
+print("Elapsed time: %.3f seconds" % calc_time_elapsed)
 
 if config.rand_places and config.save_generated_map:
     config.save_generated_map_to_file(RANDOM_MAP_SAVE_FILENAME, places_map)
