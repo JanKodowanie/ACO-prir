@@ -5,6 +5,7 @@ from config import Config
 
 MAP_FILENAME = 'map.json'
 CONFIG_FILENAME = 'config.json'
+RANDOM_MAP_SAVE_FILENAME = 'randmap.json'
 
 config = Config()
 config.read_config_from_file(CONFIG_FILENAME)
@@ -35,3 +36,6 @@ best_route_str = list(map(lambda id: places_map.places[id], best_route[0]))
 print('Best route:')
 print(' -> '.join(best_route_str))
 print(f'Length: {best_route[1]}')
+
+if config.rand_places and config.save_generated_map:
+    config.save_generated_map_to_file(RANDOM_MAP_SAVE_FILENAME, places_map)
