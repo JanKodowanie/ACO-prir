@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, List
 from mpi4py import MPI as mpi
 from numpy import ceil
 
@@ -23,12 +23,12 @@ def divide_ants(num_ants: int, num_proc: int) -> list:
     
 
 # funkcja: rozdzielenie danych pomiędzy wątki
-def scatter_data(comm: Any, blocks: list[int], root_rank=0) -> None: # root_rank na wypadek, gdybyśmy chcieli zmienić głównego workera na jeden z wątków potomnych
+def scatter_data(comm: Any, blocks: List[int], root_rank=0) -> None: # root_rank na wypadek, gdybyśmy chcieli zmienić głównego workera na jeden z wątków potomnych
     comm.scatter(blocks, root=root_rank)
 
 
 # funkcja odbierająca mrówki w wątku potomnym
-def get_ants(comm: Any, blocks: list[int], current_rank: int, root_rank=0) -> int:
+def get_ants(comm: Any, blocks: List[int], current_rank: int, root_rank=0) -> int:
     current_ants = comm.scatter(blocks, root=root_rank)
     return current_ants
 
