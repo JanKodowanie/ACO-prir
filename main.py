@@ -41,7 +41,7 @@ def main():
 
         # proces główny - przygotowanie iteracji
         if rank == 0:
-            print("Performing iteration:", i)
+            # print("Performing iteration:", i)
             colony.evaporate_pheromones()
             pl.send_data(comm, num_proc, colony)
         # procesy poboczne - przypisanie właściwej kolonii
