@@ -35,11 +35,11 @@ class AntColony:
 
         return route, total_len
 
-    def leave_pheromones(self, routes: List[List[int]]):
+    def leave_pheromones(self, routes):
         for route in routes:
-            for i in range(0, len(route) - 1):
-                conn_start = route[i]
-                conn_end = route[i+1]
+            for i in range(0, len(route[0]) - 1):
+                conn_start = route[0][i]
+                conn_end = route[0][i+1]
                 self.map.pheromones[conn_start][conn_end] += 1 / self.map.connections[conn_start][conn_end]
 
     def evaporate_pheromones(self):
