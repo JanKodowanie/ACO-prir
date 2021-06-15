@@ -22,7 +22,6 @@ def divide_ants(num_ants: int, num_proc: int) -> list:
     return blocks
     
 
-<<<<<<< HEAD
 # funkcja: rozdzielenie danych pomiędzy procesy
 def scatter_data(comm: Any, blocks: list[int], root_rank=0) -> None: # root_rank na wypadek, gdybyśmy chcieli zmienić głównego workera na jeden z procesów potomnych
     comm.scatter(blocks, root=root_rank)
@@ -30,15 +29,6 @@ def scatter_data(comm: Any, blocks: list[int], root_rank=0) -> None: # root_rank
 
 # funkcja odbierająca mrówki w procesie potomnym
 def get_ants(comm: Any, blocks: list[int], current_rank: int, root_rank=0) -> int:
-=======
-# funkcja: rozdzielenie danych pomiędzy wątki
-def scatter_data(comm: Any, blocks: List[int], root_rank=0) -> None: # root_rank na wypadek, gdybyśmy chcieli zmienić głównego workera na jeden z wątków potomnych
-    comm.scatter(blocks, root=root_rank)
-
-
-# funkcja odbierająca mrówki w wątku potomnym
-def get_ants(comm: Any, blocks: List[int], current_rank: int, root_rank=0) -> int:
->>>>>>> f23639fcdfc53fae87ca144a6a468e82301ec6f1
     current_ants = comm.scatter(blocks, root=root_rank)
     return current_ants
 
